@@ -17,6 +17,9 @@ import h5py
 import sys
 
 sys.path.append('../image_retrieval')
+sys.path.append('../object_detect/keras_frcnn/')
+import frcnn_tool 
+
 from keras.applications.vgg16 import VGG16
 from extract_cnn_vgg16_keras import extract_feat
 from keras.preprocessing import image
@@ -75,11 +78,13 @@ def download_files(msg):
     #frcnn
     #os.system("cd ../object_detect/frcnn && python test_frcnn.py -p ../"+msg.fileName+"  && cd -") 
     #itchat.send_image("frcnn/results_imgs/0.png",toUserName=msg.fromUserName)
+    frcnn_tool.frcnn_box(msg.fileName,"box.jpg")
+    itchat.send_image("box.jpg",toUserName=msg.fromUserName)
     
     #index query
-    result=engine.query(msg.fileName)
-    for img in result:
-    	itchat.send_image(img,toUserName=msg.fromUserName)
+    #result=engine.query(msg.fileName)
+    #for img in result:
+    	#itchat.send_image(img,toUserName=msg.fromUserName)
     return None
     #return '@%s@%s' % (typeSymbol, result[0])
 
