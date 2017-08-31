@@ -163,6 +163,10 @@ print('Starting training')
 
 vis = True
 
+with open('out.csv', 'w') as f:
+    f.write('Accuracy,RPN classifier,RPN regression,Detector classifier,Detector regression,Total')
+    f.write('\t')
+
 for epoch_num in range(num_epochs):
 
 	progbar = generic_utils.Progbar(epoch_length)
@@ -261,6 +265,10 @@ for epoch_num in range(num_epochs):
 					print('Loss Detector classifier: {}'.format(loss_class_cls))
 					print('Loss Detector regression: {}'.format(loss_class_regr))
 					print('Elapsed time: {}'.format(time.time() - start_time))
+
+				target_text_file = open('out.csv', 'a')
+				target_text_file.write('{},{},{},{},{},{}\n'.format(class_acc, loss_rpn_cls,loss_rpn_regr, loss_class_cls, loss_class_regr,\
+                    loss_rpn_cls + loss_rpn_regr + loss_class_cls + loss_class_regr))
 
 				curr_loss = loss_rpn_cls + loss_rpn_regr + loss_class_cls + loss_class_regr
 				iter_num = 0
