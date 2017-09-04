@@ -14,7 +14,7 @@ from keras_frcnn import roi_helpers
 
 roi_overlap_thres = 0.7
 detect_overlap_thres=0.5
-bbox_threshold = 0.8
+bbox_threshold = 0.9
 
 
 def format_img_size(img, C):
